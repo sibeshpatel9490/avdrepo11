@@ -14,6 +14,7 @@ jobs:
 
     transform-data-job:
         runs-on: ubuntu-latest
+        needs: extract-data-job
         steps:
             - name: Checout Code
               uses: actions/checkout@v2
@@ -22,6 +23,7 @@ jobs:
 
     load-data-job:
         runs-on: ubuntu-latest
+        needs: transform-data-job
         steps:
             - name: Checout Code
               uses: actions/checkout@v2
