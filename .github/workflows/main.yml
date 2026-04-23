@@ -4,28 +4,50 @@ on:
         branches:
             - main
 jobs:
-    extract-data-job:
+    job1:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout Code
               uses: actions/checkout@v2
-            - name: Run extract_data.py
-              run: python extract_data.py
-
-    transform-data-job:
+            - name: Print message
+              run: echo 'job1..'
+    job2:
         runs-on: ubuntu-latest
-        needs: extract-data-job
+        needs: job1
         steps:
-            - name: Checout Code
+            - name: Checkout Code
               uses: actions/checkout@v2
-            - name: Run transform_data.py
-              run: python transform_data.py
-
-    load-data-job:
+            - name: Print message
+              run: echo 'job2..'
+    job3:
         runs-on: ubuntu-latest
-        needs: transform-data-job
+        needs: job1
         steps:
-            - name: Checout Code
+            - name: Checkout Code
               uses: actions/checkout@v2
-            - name: Run load_data.py
-              run: python load_data.py
+            - name: Print message
+              run: echo 'job3..'
+    job4:
+        runs-on: ubuntu-latest
+        needs: job2
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+            - name: Print message
+              run: echo 'job4..'
+    job5:
+        runs-on: ubuntu-latest
+        needs: job3
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+            - name: Print message
+              run: echo 'job5..'
+    job6:
+        runs-on: ubuntu-latest
+        needs: [job4, job5]
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+            - name: Print message
+              run: echo 'job6..'
